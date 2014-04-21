@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">EasyScrum</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="add_new">Add new deck</string>
+    <string name="edit">Edit deck</string>
+    <string name="delete">Delete deck</string>
+    <string name="use_delimiter">Use "," delimiter</string>
+    <string name="plan">Planning (Fibonacci)</string>
+    <string name="preplan">Preplanning (power of 2)</string>
+    <string name="deck_name">Deck name</string>
+    <string name="mock_text">Choose deck in menu \"&lt;\" or create new one \"+\"</string>
+    <string name="no_image">no image :(</string>
+    <string name="have_name">You already have deck with this name</string>
+    <string name="have_string">You already have deck containing this cards</string>
+    <string name="empty_string">Can not create deck with no cards</string>
+    <string name="empty_card">Can not create deck with empty cards</string>
+    <string name="deck_delete">Deck was deleted</string>
+
+
+</resources>

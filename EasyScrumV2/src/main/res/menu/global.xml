@@ -1,0 +1,8 @@
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".MainActivity">
+    <item android:id="@+id/add_deck"
+        android:title="@string/add_new"
+        android:icon="@android:drawable/ic_menu_add"
+        android:showAsAction="ifRoom" />
+</menu>

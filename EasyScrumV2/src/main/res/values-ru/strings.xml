@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="app_name">EasyScrum</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="add_new">Добавить</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">Delete deck</string>
+    <string name="use_delimiter">Используйте "," как разделитель</string>
+    <string name="plan">Планирование (Фибоначчи)</string>
+    <string name="preplan">Предпланирование (степень 2)</string>
+    <string name="deck_name">Имя колоды</string>
+    <string name="mock_text">Выберите колоду из меню или создайте новую \"+\"</string>
+    <string name="no_image">no image :(</string>
+    <string name="have_name">Уже есть колода с таким именем</string>
+    <string name="have_string"> Уже есть колода с такими картами </string>
+    <string name="empty_string">Нельзя создать колоду без карт</string>
+    <string name="empty_card">Нельзя создать колоду с пустыми картами</string>
+    <string name="deck_delete">Колода была удалена</string>
+
+</resources>
