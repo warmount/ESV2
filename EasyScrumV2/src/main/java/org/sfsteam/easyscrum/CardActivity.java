@@ -1,8 +1,10 @@
 package org.sfsteam.easyscrum;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,14 +22,22 @@ public class CardActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.root = (RelativeLayout) this.getLayoutInflater().inflate(R.layout.card_layout, null);
         this.setContentView(root);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
-        Bundle b = getIntent().getExtras();
-        String cardValue = b.getString("card");
+        setCardSystemView();
+        String cardValue = getIntent().getStringExtra("card");
+
+        if (cardValue == null || cardValue.isEmpty()) {
+            throw new RuntimeException("card is empty");
+        }
 
         cardTv = (TextView) root.findViewById(R.id.card_num);
-        switch (cardValue.length()){
+        root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showCard(cardTv);
+            }
+        });
+        switch (cardValue.length()) {
             case 1:
-                ;
             case 2:
                 cardTv.setTextSize(250);
                 break;
@@ -44,7 +54,24 @@ public class CardActivity extends Activity {
         });
     }
 
-    public void showCard(View v){
+    private void setCardSystemView() {
+        if (Build.VERSION.SDK_INT > 18) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE);
+        } else if (Build.VERSION.SDK_INT > 15) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN);
+        } else {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+    }
+
+    public void showCard(View cardTv) {
         LinearLayout startLay = (LinearLayout) root.findViewById(R.id.start);
         startLay.setVisibility(View.GONE);
         cardTv.setVisibility(View.VISIBLE);
@@ -52,10 +79,10 @@ public class CardActivity extends Activity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState){
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (cardState == 1){
-            outState.putBoolean("open",true);
+        if (cardState == 1) {
+            outState.putBoolean("open", true);
         }
     }
 

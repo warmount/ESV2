@@ -21,9 +21,10 @@ import org.sfsteam.easyscrum.R;
 public class DeckArrayAdapter extends ArrayAdapter<String> {
     String[] cards;
     MainActivity activity;
-    public DeckArrayAdapter(Context applicationContext, int grid_item, int tvText, String[] data) {
-        super(applicationContext, grid_item,tvText,data);
+    public DeckArrayAdapter(MainActivity activity, int grid_item, int tvText, String[] data) {
+        super(activity.getApplicationContext(), grid_item,tvText,data);
         this.cards = data;
+        this.activity = activity;
     }
 
     @Override
@@ -46,14 +47,10 @@ public class DeckArrayAdapter extends ArrayAdapter<String> {
         cardTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.startCardActivity(cardTv.getText().toString());
+                activity.startCardActivity(cardText);
             }
         });
 
         return grid;
-    }
-
-    public void setActivity(MainActivity activity) {
-        this.activity = activity;
     }
 }

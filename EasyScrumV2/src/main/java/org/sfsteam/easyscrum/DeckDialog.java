@@ -24,6 +24,7 @@ import java.util.List;
  */
 public class DeckDialog extends DialogFragment {
 
+    public static final String COMMA = ",";
     private String deckName;
     private String deckAsString;
     private DeckDT deck;
@@ -61,13 +62,13 @@ public class DeckDialog extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        if (mode == null){
+        if (mode == null) {
             mode = DialogMode.valueOf(savedInstanceState.getString("mode"));
         }
 
         List<DeckDT> lst = ((MainActivity) getActivity()).getDeckList();
         deck = getDeckFromSaved(savedInstanceState, lst);
-        builder.setTitle(mode==DialogMode.ADD ? R.string.add_new : R.string.edit);
+        builder.setTitle(mode == DialogMode.ADD ? R.string.add_new : R.string.edit);
         View dialogView = inflater.inflate(R.layout.deck_dialog, null);
         builder.setView(dialogView);
 
@@ -78,7 +79,7 @@ public class DeckDialog extends DialogFragment {
                 string.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (getActivity()==null){
+                        if (getActivity() == null) {
                             return;
                         }
                         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -119,15 +120,15 @@ public class DeckDialog extends DialogFragment {
         if (deck != null) {
             return deck;
         }
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             return null;
         }
         int savedDeckId = savedInstanceState.getInt("deckId");
-            for (DeckDT deckDt : lst){
-                if (deckDt.getId() == savedDeckId){
-                   return deckDt;
-                }
+        for (DeckDT deckDt : lst) {
+            if (deckDt.getId() == savedDeckId) {
+                return deckDt;
             }
+        }
         return null;
 
     }
@@ -148,14 +149,20 @@ public class DeckDialog extends DialogFragment {
             showToastTop(activity, R.string.empty_string);
             return false;
         }
-        for (String card : deckAsString.split(",")){
-            if (card.trim().isEmpty()){
+        String[] splitArray = deckAsString.split(COMMA);
+        int commaOccur = deckAsString.length() - deckAsString.replace(COMMA, "").length();
+        if (splitArray.length <= commaOccur) {
+            showToastTop(activity, R.string.empty_card);
+            return false;
+        }
+        for (String card : splitArray) {
+            if (card.trim().isEmpty()) {
                 showToastTop(activity, R.string.empty_card);
                 return false;
             }
         }
 
-        if (deckName.trim().isEmpty()){
+        if (deckName.trim().isEmpty()) {
             deckName = deckAsString;
         }
         List<DeckDT> deckList = activity.getDeckList();
@@ -169,7 +176,6 @@ public class DeckDialog extends DialogFragment {
             }
             if (deckForCheck.getDeckString().equals(deckAsString)) {
                 showToastTop(activity, R.string.have_string);
-
                 return false;
             }
         }
@@ -194,7 +200,7 @@ public class DeckDialog extends DialogFragment {
     }
 
     private void showToastTop(MainActivity activity, int string) {
-        Toast toast = Toast.makeText(activity, string,Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(activity, string, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP, 0, 0);
         toast.show();
     }
@@ -215,9 +221,9 @@ public class DeckDialog extends DialogFragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-            outState.putString("deckName", deckName);
-            outState.putString("deckString", deckAsString);
-            outState.putString("mode", mode.toString());
+        outState.putString("deckName", deckName);
+        outState.putString("deckString", deckAsString);
+        outState.putString("mode", mode.toString());
         if (deck != null) {
             outState.putInt("deckId", deck.getId());
         }

@@ -129,7 +129,7 @@ public class NavigationDrawerFragment extends Fragment {
         String[] array = new String[listStr.size()];
         int i = 0;
         for (DeckDT d : listStr) {
-            array[i] = getStringName(d.getName());
+            array[i] = d.getName();
             i++;
         }
 
@@ -141,11 +141,6 @@ public class NavigationDrawerFragment extends Fragment {
         getActivity().invalidateOptionsMenu();
 
 
-    }
-
-    private String getStringName(String string) {
-        return string;
-//        return string.length() > 11 ? string.substring(0, 10) + ".." : string;
     }
 
     public boolean isDrawerOpen() {

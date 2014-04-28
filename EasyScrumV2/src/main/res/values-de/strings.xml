@@ -1,5 +1,21 @@
 <resources>
 
-    <string name="empty_card">Unmöglich Stapel mit leeren Karten zu erstellen</string>
+    <string name="app_name">EasyScrum</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="add_new">hinzufügen</string>
+    <string name="edit">bearbeiten</string>
+    <string name="delete">Stapel löschen</string>
+    <string name="use_delimiter">Nutzen Sie "," als Trenner</string>
+    <string name="plan">Planen(Fibonacci)</string>
+    <string name="preplan">Vorplanung(Stufe 2)</string>
+    <string name="deck_name">Name des Stapels</string>
+    <string name="mock_text">Wählen Sie einen Stapel aus dem Menü oder schaffen Sie einen neuen \"+\"</string>
+    <string name="no_image">no image :(</string>
+    <string name="have_name">Der Stapel mit gleichem Namen existiert schon</string>
+    <string name="have_string"> Der Stapel mit gleichen Karten existiert schon </string>
+    <string name="empty_string">Unmöglich den Stapel ohne Karten zu erstellen</string>
+    <string name="empty_card">Unmöglich den Stapel mit leeren Karten zu erstellen</string>
+    <string name="deck_delete">Der Stapel wurde entfernt</string>
 
 </resources>

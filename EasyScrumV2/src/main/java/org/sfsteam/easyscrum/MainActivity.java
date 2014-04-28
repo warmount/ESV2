@@ -13,12 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import org.sfsteam.easyscrum.data.DeckArrayAdapter;
 import org.sfsteam.easyscrum.data.DeckDT;
 import org.sfsteam.easyscrum.data.DialogMode;
 
@@ -36,6 +37,8 @@ import java.util.Map;
 public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, DeckDialog.DeckDialogListener {
 
+    public static final String POWER_OF_2 = "1,2,4,8,16";
+    public static final String FIBONACCI = "1,2,3,5,8,13";
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -74,8 +77,8 @@ public class MainActivity extends FragmentActivity
         List<DeckDT> listStr = (List<DeckDT>) loadSerializedList(suspend_f);
         if (listStr == null) {
             listStr = new ArrayList<>();
-            listStr.add(new DeckDT(0, getString(R.string.preplan), "1,2,4,8,16"));
-            listStr.add(new DeckDT(1, getString(R.string.plan), "1,2,3,5,8,13"));
+            listStr.add(new DeckDT(0, getString(R.string.preplan), POWER_OF_2));
+            listStr.add(new DeckDT(1, getString(R.string.plan), FIBONACCI));
         }
         return listStr;
     }
@@ -127,7 +130,7 @@ public class MainActivity extends FragmentActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+        if (mNavigationDrawerFragment!=null && !mNavigationDrawerFragment.isDrawerOpen()) {
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
@@ -219,14 +222,13 @@ public class MainActivity extends FragmentActivity
 
             if (getArguments() != null) {
                 GridView gv = (GridView) rootView.findViewById(R.id.gridView);
-                DeckArrayAdapter adapter = new DeckArrayAdapter(getActivity().getApplicationContext(),
+                DeckArrayAdapter adapter = new DeckArrayAdapter((MainActivity) getActivity(),
                         R.layout.grid_item,
                         R.id.tvText,
                         getArguments().getStringArray(DECKASARRAY)
                 );
                 TextView tv = (TextView) rootView.findViewById(R.id.mockText);
                 tv.setVisibility(View.GONE);
-                adapter.setActivity((MainActivity) getActivity());
                 gv.setAdapter(adapter);
                 gv.setVisibility(View.VISIBLE);
             } else {
@@ -239,7 +241,6 @@ public class MainActivity extends FragmentActivity
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-
             if (getArguments() != null) {
                 ((MainActivity) activity).onSectionAttached(getArguments().getInt(DECKID));
             }
@@ -248,9 +249,9 @@ public class MainActivity extends FragmentActivity
 
     public void startCardActivity(String value) {
         Intent intent = new Intent(MainActivity.this, CardActivity.class);
-        Bundle b = new Bundle();
-        b.putString("card", value);
-        intent.putExtras(b);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra("card", value);
         startActivity(intent);
     }
 
@@ -268,9 +269,7 @@ public class MainActivity extends FragmentActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
         if (deckInGrid != null) {
-            outState.putInt("deckId", deckInGrid.getId());
             outState.putString("deck", deckInGrid.getDeckString());
         }
     }
@@ -278,12 +277,10 @@ public class MainActivity extends FragmentActivity
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-
         String deck = savedInstanceState.getString("deck");
         if (deck != null) {
             onNavigationDrawerItemSelected(deckList.indexOf(deck));
         }
-
     }
 
     public List<DeckDT> getDeckList() {
@@ -315,7 +312,9 @@ public class MainActivity extends FragmentActivity
                 if (oos != null) oos.close();
                 if (fos != null) fos.close();
                 if (keep == false) suspend_f.delete();
-            } catch (Exception e) { /* do nothing */ }
+            } catch (Exception e) {
+                Log.e("EasyScrum", "failed to close", e);
+            }
         }
     }
 
@@ -323,5 +322,42 @@ public class MainActivity extends FragmentActivity
     public void onPause() {
         super.onPause();
         saveList();
+    }
+
+    static class DeckArrayAdapter extends ArrayAdapter<String> {
+        String[] cards;
+        MainActivity activity;
+        public DeckArrayAdapter(MainActivity activity, int grid_item, int tvText, String[] data) {
+            super(activity.getApplicationContext(), grid_item,tvText,data);
+            this.cards = data;
+            this.activity = activity;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+
+            final View grid = activity.getLayoutInflater().inflate(R.layout.grid_item, parent, false);
+            final TextView cardTv = (TextView) grid.findViewById(R.id.tvText);
+            final String cardText = cards[position];
+            if (cardText.length()<5){
+                cardTv.setTextSize(50);
+            }
+
+            cardTv.setText(cardText);
+            cardTv.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    return  false;
+                }
+            });
+            cardTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    activity.startCardActivity(cardText);
+                }
+            });
+
+            return grid;
+        }
     }
 }
