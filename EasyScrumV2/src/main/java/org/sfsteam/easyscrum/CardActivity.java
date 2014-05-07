@@ -3,11 +3,15 @@ package org.sfsteam.easyscrum;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by warmount on 15.06.13.
@@ -23,11 +27,7 @@ public class CardActivity extends Activity {
         this.root = (RelativeLayout) this.getLayoutInflater().inflate(R.layout.card_layout, null);
         this.setContentView(root);
         setCardSystemView();
-        String cardValue = getIntent().getStringExtra("card");
-
-        if (cardValue == null || cardValue.isEmpty()) {
-            throw new RuntimeException("card is empty");
-        }
+        final String cardValue = getIntent().getStringExtra("card");
 
         cardTv = (TextView) root.findViewById(R.id.card_num);
         root.setOnClickListener(new View.OnClickListener() {
@@ -39,13 +39,13 @@ public class CardActivity extends Activity {
         switch (cardValue.length()) {
             case 1:
             case 2:
-                cardTv.setTextSize(250);
-                break;
-            case 3:
                 cardTv.setTextSize(200);
                 break;
+            case 3:
+                cardTv.setTextSize(150);
+                break;
         }
-        cardTv.setText(cardValue);
+        cardTv.setText(Html.fromHtml(cardValue).toString());
         cardTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

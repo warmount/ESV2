@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="org.sfsteam.easyscrum.MainActivity$PlaceholderFragment">
 
     <TextView
@@ -16,8 +14,7 @@
         android:visibility="gone"
         android:gravity="center_vertical|center_horizontal"
         android:textColor="#A9A9A9"
-        android:textSize="20dp"
-        android:layout_margin="20dp"/>
+        android:textSize="20dp"/>
 
     <GridView
         android:layout_width="fill_parent"
@@ -30,7 +27,6 @@
         android:verticalSpacing="10dp"
         android:visibility="gone"
         android:clickable="false"
-        android:choiceMode="singleChoice"
-        android:smoothScrollbar="false"/>
+        android:choiceMode="singleChoice"/>
 
 </RelativeLayout>

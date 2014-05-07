@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import org.sfsteam.easyscrum.data.DeckArrayAdapter;
 import org.sfsteam.easyscrum.data.DeckDT;
 import org.sfsteam.easyscrum.data.DialogMode;
 
@@ -35,7 +36,7 @@ import java.util.Map;
 
 
 public class MainActivity extends FragmentActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, DeckDialog.DeckDialogListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, DeckDialog.DeckDialogListener, DeckArrayAdapter.CardActivityCallback {
 
     public static final String POWER_OF_2 = "1,2,4,8,16";
     public static final String FIBONACCI = "1,2,3,5,8,13";
@@ -322,42 +323,5 @@ public class MainActivity extends FragmentActivity
     public void onPause() {
         super.onPause();
         saveList();
-    }
-
-    static class DeckArrayAdapter extends ArrayAdapter<String> {
-        String[] cards;
-        MainActivity activity;
-        public DeckArrayAdapter(MainActivity activity, int grid_item, int tvText, String[] data) {
-            super(activity.getApplicationContext(), grid_item,tvText,data);
-            this.cards = data;
-            this.activity = activity;
-        }
-
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-
-            final View grid = activity.getLayoutInflater().inflate(R.layout.grid_item, parent, false);
-            final TextView cardTv = (TextView) grid.findViewById(R.id.tvText);
-            final String cardText = cards[position];
-            if (cardText.length()<5){
-                cardTv.setTextSize(50);
-            }
-
-            cardTv.setText(cardText);
-            cardTv.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    return  false;
-                }
-            });
-            cardTv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    activity.startCardActivity(cardText);
-                }
-            });
-
-            return grid;
-        }
     }
 }
