@@ -6,7 +6,7 @@
     <string name="add_new">hinzufügen</string>
     <string name="edit">bearbeiten</string>
     <string name="delete">Stapel löschen</string>
-    <string name="use_delimiter">Nutzen Sie "," als Trenner</string>
+    <string name="use_delimiter">Nutzen Sie \",\" als Trenner</string>
     <string name="plan">Planen(Fibonacci)</string>
     <string name="preplan">Vorplanung(Stufe 2)</string>
     <string name="deck_name">Name des Stapels</string>
@@ -17,5 +17,19 @@
     <string name="empty_string">Unmöglich den Stapel ohne Karten zu erstellen</string>
     <string name="empty_card">Unmöglich den Stapel mit leeren Karten zu erstellen</string>
     <string name="deck_delete">Der Stapel wurde entfernt</string>
+    <string name="alias_name">Alias name</string>
+    <string name="image_chooser">Button</string>
+    <string name="path">Path</string>
+    <string name="file_choose">Pick image file</string>
+    <string name="delete_from_map">Delete %s from map</string>
+    <string name="folder">Folder</string>
+    <string name="file_size">File Size:</string>
+    <string name="current_folder">Current Dir:</string>
+    <string name="parent_folder">Parent Directory</string>
+    <string name="title_activity_image">\@ to use image</string>
+    <string name="addNewDemo">Add new deck</string>
+    <string name="openDemo">Open menu</string>
+    <string name="mapImages">Map images to alias</string>
+    <string name="same_image">You cannot add same image with the same alias name</string>
 
 </resources>

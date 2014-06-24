@@ -6,7 +6,7 @@
     <string name="add_new">Добавить</string>
     <string name="edit">Редактировать</string>
     <string name="delete">Delete deck</string>
-    <string name="use_delimiter">Используйте "," как разделитель</string>
+    <string name="use_delimiter">Используйте \",\" как разделитель</string>
     <string name="plan">Планирование (Фибоначчи)</string>
     <string name="preplan">Предпланирование (степень 2)</string>
     <string name="deck_name">Имя колоды</string>
@@ -17,5 +17,19 @@
     <string name="empty_string">Нельзя создать колоду без карт</string>
     <string name="empty_card">Нельзя создать колоду с пустыми картами</string>
     <string name="deck_delete">Колода была удалена</string>
+    <string name="alias_name">Имя карты</string>
+    <string name="image_chooser">Button</string>
+    <string name="path">Путь</string>
+    <string name="file_choose">Pick image file</string>
+    <string name="delete_from_map">\"%s\" удален из маппинга</string>
+    <string name="folder">Папка</string>
+    <string name="file_size">Размер файла: </string>
+    <string name="current_folder">Текущая папка: </string>
+    <string name="parent_folder">Вверх</string>
+    <string name="title_activity_image">Используйте @имя в колоде</string>
+    <string name="addNewDemo">Добавить новую колоду</string>
+    <string name="openDemo">Открыть меню</string>
+    <string name="mapImages">Маппинг картинки на имя. Используйте @имя в колоде</string>
+    <string name="same_image">Вы не можете сохранить маппинг на ту же картинку с тем же именем</string>
 
 </resources>

@@ -56,9 +56,9 @@ public class DeckDT implements Serializable {
         DeckDT other = (DeckDT) obj;
         if (id != other.id)
             return false;
-        if (name != other.getName())
+        if (!name.equals(other.getName()))
             return false;
-        if (deckString != other.getDeckString())
+        if (!deckString.equals(other.getDeckString()))
             return false;
         return true;
     }

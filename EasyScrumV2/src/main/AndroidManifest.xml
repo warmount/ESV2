@@ -16,8 +16,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="org.sfsteam.easyscrum.CardActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name="org.sfsteam.easyscrum.CardActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="org.sfsteam.easyscrum.ImageActivity"
+            android:label="@string/title_activity_image" >
+        </activity>
+        <activity
+            android:name="org.sfsteam.easyscrum.FileChooser"
+            android:label="@string/file_choose" >
+        </activity>
+        <activity
+            android:name="org.sfsteam.easyscrum.TransparentActivity"
+            android:label="@string/title_activity_transparent"
+            android:theme="@style/Transparent">
+        </activity>
     </application>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

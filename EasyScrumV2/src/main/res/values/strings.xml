@@ -7,7 +7,7 @@
     <string name="add_new">Add new deck</string>
     <string name="edit">Edit deck</string>
     <string name="delete">Delete deck</string>
-    <string name="use_delimiter">Use "," delimiter</string>
+    <string name="use_delimiter">Use \",\" delimiter</string>
     <string name="plan">Planning (Fibonacci)</string>
     <string name="preplan">Preplanning (power of 2)</string>
     <string name="deck_name">Deck name</string>
@@ -18,6 +18,20 @@
     <string name="empty_string">Can not create deck with no cards</string>
     <string name="empty_card">Can not create deck with empty cards</string>
     <string name="deck_delete">Deck was deleted</string>
-
+    <string name="title_activity_image">Use @alias in deck</string>
+    <string name="alias_name">Alias name</string>
+    <string name="image_chooser">Button</string>
+    <string name="path">Path</string>
+    <string name="file_choose">Pick image file</string>
+    <string name="delete_from_map">Delete "%s" from map</string>
+    <string name="folder">Folder</string>
+    <string name="file_size">File Size:</string>
+    <string name="current_folder">Current Dir:</string>
+    <string name="parent_folder">Parent Directory</string>
+    <string name="title_activity_transparent">TransparentActivity</string>
+    <string name="addNewDemo">Add new deck</string>
+    <string name="openDemo">Open menu</string>
+    <string name="mapImages">Map images to alias. Use @alias in deck</string>
+    <string name="same_image">You cannot add same image with the same alias name</string>
 
 </resources>

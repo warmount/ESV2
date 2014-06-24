@@ -1,25 +1,27 @@
 package org.sfsteam.easyscrum;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.TextUtils;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by warmount on 15.06.13.
  */
 public class CardActivity extends Activity {
+    private static final String PACKAGE_NAME = "org.sfsteam.easyscrum";
     RelativeLayout root;
     TextView cardTv;
-    int cardState;
+    ImageView cardImage;
+    boolean cardState;
+    boolean isImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +30,24 @@ public class CardActivity extends Activity {
         this.setContentView(root);
         setCardSystemView();
         final String cardValue = getIntent().getStringExtra("card");
+        final String imageName = getIntent().getStringExtra("image");
+        if (imageName != null) {
+            cardImage = (ImageView) root.findViewById(R.id.cardImage);
+            cardImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            });
+            cardImage.setImageURI(Uri.parse(imageName));
+        }
 
         cardTv = (TextView) root.findViewById(R.id.card_num);
+        cardTv.setText(Html.fromHtml(cardValue).toString());
         root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showCard(cardTv);
+                showCard(cardTv, imageName);
             }
         });
         switch (cardValue.length()) {
@@ -45,7 +59,6 @@ public class CardActivity extends Activity {
                 cardTv.setTextSize(150);
                 break;
         }
-        cardTv.setText(Html.fromHtml(cardValue).toString());
         cardTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,30 +84,48 @@ public class CardActivity extends Activity {
         }
     }
 
-    public void showCard(View cardTv) {
+    public void showCard(View cardTv, String imageName) {
         LinearLayout startLay = (LinearLayout) root.findViewById(R.id.start);
         startLay.setVisibility(View.GONE);
-        cardTv.setVisibility(View.VISIBLE);
-        cardState = 1;
+        cardState = true;
+        if (imageName == null) {
+            cardTv.setVisibility(View.VISIBLE);
+            return;
+        }
+        cardImage.setVisibility(View.VISIBLE);
+        isImage = true;
+
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (cardState == 1) {
+        if (cardState) {
             outState.putBoolean("open", true);
+        }
+        if (isImage) {
+            outState.putBoolean("image", true);
         }
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState.getBoolean("open")) {
-            LinearLayout startLay = (LinearLayout) root.findViewById(R.id.start);
-            startLay.setVisibility(View.GONE);
+        if (!savedInstanceState.getBoolean("open")) {
+            return;
+        }
+        LinearLayout startLay = (LinearLayout) root.findViewById(R.id.start);
+        startLay.setVisibility(View.GONE);
+        if (!savedInstanceState.getBoolean("image")) {
             TextView cardTv = (TextView) root.findViewById(R.id.card_num);
             cardTv.setVisibility(View.VISIBLE);
-            cardState = 1;
+        } else {
+            ImageView cardImage = (ImageView) root.findViewById(R.id.cardImage);
+            cardImage.setVisibility(View.VISIBLE);
+            isImage = true;
         }
+        cardState = true;
     }
+
+
 }

@@ -296,7 +296,7 @@ public class NavigationDrawerFragment extends Fragment {
             this.setNewList();
 
             mCurrentSelectedPosition = getPositionAfterDelete(listStr);
-            if (mCurrentSelectedPosition != -1){
+            if (mCurrentSelectedPosition != -1) {
                 mCallbacks.onNavigationDrawerItemSelected(mCurrentSelectedPosition);
             } else {
                 mCallbacks.setTextInGrid();
@@ -327,10 +327,10 @@ public class NavigationDrawerFragment extends Fragment {
         if (list.isEmpty()) {
             return -1;
         }
-        if (mCurrentSelectedPosition==0){
+        if (mCurrentSelectedPosition == 0) {
             return 0;
         }
-        return mCurrentSelectedPosition-1;
+        return mCurrentSelectedPosition - 1;
     }
 
     /**

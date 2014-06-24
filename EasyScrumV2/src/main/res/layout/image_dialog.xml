@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:stretchColumns="1">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:inputType="text"
+                android:id="@+id/alias_name"
+                android:padding="10dp"
+                android:layout_span="4"
+                android:hint="@string/alias_name"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:inputType="text"
+                android:id="@+id/alias_path"
+                android:padding="10dp"
+                android:layout_span="3"
+                android:hint="@string/path"
+                android:layout_column="0"
+                />
+            <ImageView
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_search"
+                android:layout_margin="5dp"
+                android:text="@string/image_chooser"
+                android:layout_column="3"
+                android:scaleType="fitCenter"
+                android:baselineAlignBottom="false"
+                android:layout_gravity="center"
+                android:contentDescription="Find Image"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@android:string/cancel"
+                android:id="@+id/cancelButton"
+                android:layout_weight="0.5" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@android:string/ok"
+                android:id="@+id/okButton"
+                android:layout_weight="0.5" />
+        </TableRow>
+
+    </TableLayout>
