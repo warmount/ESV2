@@ -303,10 +303,19 @@ public class MainActivity extends FragmentActivity
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("card", value);
-        if (value.startsWith("@")) {
-            intent.putExtra("image", imagesMap.get(value.substring(1, value.length())).getPath());
+        startActivity(putImagePathIfExist(value, intent));
+    }
+
+    private Intent putImagePathIfExist(String value, Intent intent) {
+        if (!value.startsWith("@")) {
+            return intent;
         }
-        startActivity(intent);
+        ImageDT imageDT = imagesMap.get(value.substring(1, value.length()));
+        if (imageDT == null) {
+            return intent;
+        }
+        intent.putExtra("image", imageDT.getPath());
+        return intent;
     }
 
     @Override
@@ -394,6 +403,8 @@ public class MainActivity extends FragmentActivity
             case (1): {
                 if (resultCode == Activity.RESULT_OK) {
                     setImagesMap((HashMap<String, ImageDT>) data.getSerializableExtra("imageMap"));
+                    mNavigationDrawerFragment.setNewList();
+                    onNavigationDrawerItemSelected(deckList.indexOf(deckInGrid));
                 }
                 break;
             }
