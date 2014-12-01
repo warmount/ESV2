@@ -6,7 +6,8 @@
               android:layout_height="150dp"
               android:background="@android:drawable/editbox_background_normal"
               android:orientation="vertical"
-              tools:context=".MainActivity">
+              tools:context=".MainActivity"
+    android:padding="5dp">
 
     <TextView
             android:layout_width="fill_parent"

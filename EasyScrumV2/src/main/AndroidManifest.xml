@@ -25,6 +25,7 @@
         </activity>
         <activity
             android:name="org.sfsteam.easyscrum.FileChooser"
+            android:theme="@style/AppTheme"
             android:label="@string/file_choose" >
         </activity>
         <activity

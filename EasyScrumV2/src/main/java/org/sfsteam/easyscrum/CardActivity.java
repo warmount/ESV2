@@ -1,6 +1,11 @@
 package org.sfsteam.easyscrum;
 
 import android.app.Activity;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,9 +24,16 @@ public class CardActivity extends Activity {
     private static final String PACKAGE_NAME = "org.sfsteam.easyscrum";
     RelativeLayout root;
     TextView cardTv;
+    String imageName;
     ImageView cardImage;
     boolean cardState;
     boolean isImage;
+
+    private static final int SHAKE_SENSITIVITY = 15;
+
+    private SensorManager sensorManager;
+    private float accel = SensorManager.GRAVITY_EARTH * 2.0f;
+    private float accelPrevious = SensorManager.GRAVITY_EARTH * 2.0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +42,7 @@ public class CardActivity extends Activity {
         this.setContentView(root);
         setCardSystemView();
         final String cardValue = getIntent().getStringExtra("card");
-        final String imageName = getIntent().getStringExtra("image");
+        imageName = getIntent().getStringExtra("image");
         if (imageName != null) {
             cardImage = (ImageView) root.findViewById(R.id.cardImage);
             cardImage.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +77,12 @@ public class CardActivity extends Activity {
                 finish();
             }
         });
+
+        sensorManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
+        sensorManager.registerListener(
+                sensorListener,
+                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     private void setCardSystemView() {
@@ -127,5 +145,40 @@ public class CardActivity extends Activity {
         cardState = true;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        sensorManager.registerListener(
+                sensorListener,
+                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    public void onStop() {
+        sensorManager.unregisterListener(sensorListener);
+
+        super.onStop();
+    }
+
+    private final SensorEventListener sensorListener = new SensorEventListener() {
+
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            float x = sensorEvent.values[0];
+            float y = sensorEvent.values[1];
+            float z = sensorEvent.values[2];
+            accelPrevious = accel;
+            accel = (float) Math.sqrt((double) (x * x + y * y + z * z));
+            if (accel - accelPrevious > SHAKE_SENSITIVITY) {
+                showCard(cardTv,imageName);
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+
+        }
+    };
 }

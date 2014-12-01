@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
@@ -47,6 +48,8 @@ public class MainActivity extends FragmentActivity
     private static final String FIBONACCI = "1,2,3,5,8,13,@cup";
     private static final String EASY_SCRUM_LST = "easyScrum.lst";
     private static final String CUP_NAME = "cup.png";
+    public static final String PREFS_NAME = "EasyScrumPrefs";
+    public static final String DEFAULT_DECK = "default_deck";
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -56,7 +59,6 @@ public class MainActivity extends FragmentActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-
 
     public static final String IMAGES_MAP = "images.map";
 
@@ -69,6 +71,8 @@ public class MainActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         setDeckList(loadDeckList());
         setImagesMap(loadImagesMap());
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        int prefDeckId = settings.getInt(DEFAULT_DECK,-1);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -80,6 +84,9 @@ public class MainActivity extends FragmentActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        if (prefDeckId != -1 && !deckList.isEmpty()){
+            onNavigationDrawerItemSelected(getIndexById(getDeckList(),prefDeckId));
+        }
     }
 
     public List<DeckDT> loadDeckList() {
@@ -102,9 +109,34 @@ public class MainActivity extends FragmentActivity
         String path = Environment.getExternalStorageDirectory() + "/easyScrum";
         final File imagesFile = new File(path + File.separator + IMAGES_MAP);
         HashMap<String, ImageDT> imagesMap = (HashMap<String, ImageDT>) loadSerializedFile(imagesFile);
-        if (imagesMap != null) {
+        //new install
+        if (imagesMap == null) {
+            imagesMap = new HashMap<>();
+            imagesMap.put("cup",getNewInstallCup(path));
             return imagesMap;
         }
+        //ignore if no cup in map
+        if (!imagesMap.containsKey("cup")){
+            return imagesMap;
+        }
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        //replace with cup
+        if (!settings.getBoolean("new_cup",false)){
+            ImageDT cupDT = imagesMap.get("cup");
+            (new File(cupDT.getPath())).delete();
+            (new File(cupDT.getThumbnailPath())).delete();
+            imagesMap.put("cup",getNewInstallCup(path));
+
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("new_cup", true);
+            //never replace with new cup
+            editor.commit();
+        }
+        return imagesMap;
+    }
+
+    private ImageDT getNewInstallCup(String path) {
         String imagePath = path + File.separator + "images/";
         String thumbPath = path + File.separator + ".thumbnails/";
         File imagesDir = new File(imagePath);
@@ -129,9 +161,7 @@ public class MainActivity extends FragmentActivity
             Log.e("IO", e.getLocalizedMessage());
         }
 
-        HashMap<String, ImageDT> javaImagesMap = new HashMap<>();
-        javaImagesMap.put("cup", cup);
-        return javaImagesMap;
+        return cup;
     }
 
     @Override
@@ -409,5 +439,28 @@ public class MainActivity extends FragmentActivity
                 break;
             }
         }
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+
+        // We need an Editor object to make preference changes.
+        // All objects are from android.context.Context
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt(DEFAULT_DECK, deckInGrid.getId());
+
+        // Commit the edits!
+        editor.commit();
+    }
+
+    private int getIndexById(List<DeckDT> list,int id){
+        for (DeckDT dt: list){
+            if (id == dt.getId()){
+                return list.indexOf(dt);
+            }
+        }
+        return 0;
     }
 }

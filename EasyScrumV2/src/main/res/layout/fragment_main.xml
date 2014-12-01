@@ -27,6 +27,6 @@
         android:verticalSpacing="10dp"
         android:visibility="gone"
         android:clickable="false"
-        android:choiceMode="singleChoice"/>
+        android:choiceMode="singleChoice" />
 
 </RelativeLayout>

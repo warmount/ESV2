@@ -29,13 +29,13 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:inputType="text"
+                android:inputType="none"
                 android:id="@+id/alias_path"
                 android:padding="10dp"
                 android:layout_span="3"
                 android:hint="@string/path"
                 android:layout_column="0"
-                />
+                android:textIsSelectable="true" />
             <ImageView
                 android:id="@+id/search_button"
                 android:layout_width="wrap_content"
