@@ -1,0 +1,33 @@
+<resources>
+        <string name = "app_name">EasyScrum</ string>
+        <string name = "navigation_drawer_open">Cassetto navigazione Apri</ string>
+        <string name = "navigation_drawer_close">Primo cassetto navigazione</ string>
+        <string name = "add_new">Aggiungi nuovo</ string>
+        <string name = "edit">Modifica</ string>
+        <string name = "delete">Elimina?</ string>
+        <string name = "use_delimiter">Usa \ ", \" come delimitatore</ string>
+        <string name = "plan">Pianificazione (Fibonacci)</ string>
+        <string name = "preplan">Preplanning (potenza di 2)</ string>
+        <string name = "deck_name">Nome Deck</ string>
+        <string name = "mock_text">Scegli ponte in menu o creare nuovo \ "+ \"</ string>
+        <string name = "no_image">nessuna immagine: (</ string>
+        <string name = "have_name">Hai già coperta con il nome</ string>
+        <string name = "have_string">Hai già piattaforma contenente questo carte</ string>
+        <string name = "empty_string">Impossibile creare ponte senza carte</ string>
+        <string name = "empty_card">Impossibile creare mazzo con carte vuote</ string>
+        <string name = "deck_delete">Deck è stato cancellato</ string>
+        <string name = "title_activity_image">Usaalias a ponte</ string>
+        <string name = "image_chooser">Pulsante</ string>
+        <string name = "path">Percorso</ string>
+        <string name = "file_choose">Scegli file immagine</ string>
+        <string name = "delete_from_map">Cancella "% s" dalla mappa</ string>
+        <string name = "folder">Cartella</ string>
+        <string name = "file_size">Dimensione File:</ string>
+        <string name = "current_folder">Dir Current:</ string>
+        <string name = "parent_folder">Parent Directory</ string>
+        <string name = "addNewDemo">Aggiungi nuovo ponte</ string>
+        <string name="alias_name">Nome Alias</string>
+        <string name = "openDemo">Aprire il menu</ string>
+        <string name = "mapImages">Mappa immagini a alias. Utilizzare @alias a ponte</ string>
+        <string name = "same_image">Non puoi aggiungere stessa immagine con lo stesso nome alias</ string>
+</resources>

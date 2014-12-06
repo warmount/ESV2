@@ -188,10 +188,10 @@ public class DeckDialog extends DialogFragment {
                         maxId = deckForCheck.getId();
                     }
                 }
-                deck = new DeckDT(maxId + 1, deckName.trim(), deckAsString.trim());
+                deck = new DeckDT(maxId + 1, deckName.trim(), deckAsString.replaceAll(",\\s+",COMMA));
                 break;
             case EDIT:
-                deck.setDeckString(deckAsString.trim());
+                deck.setDeckString(deckAsString.replaceAll(",\\s+",COMMA));
                 deck.setName(deckName.trim());
                 break;
         }

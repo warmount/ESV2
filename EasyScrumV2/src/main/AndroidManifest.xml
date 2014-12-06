@@ -21,7 +21,8 @@
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
         <activity
             android:name="org.sfsteam.easyscrum.ImageActivity"
-            android:label="@string/title_activity_image" >
+            android:label="@string/title_activity_image"
+            android:parentActivityName="org.sfsteam.easyscrum.MainActivity">
         </activity>
         <activity
             android:name="org.sfsteam.easyscrum.FileChooser"

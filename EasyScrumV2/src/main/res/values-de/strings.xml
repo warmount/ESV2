@@ -5,7 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="add_new">hinzufügen</string>
     <string name="edit">bearbeiten</string>
-    <string name="delete">Stapel löschen</string>
+    <string name="delete">löschen?</string>
     <string name="use_delimiter">Nutzen Sie \",\" als Trenner</string>
     <string name="plan">Planen(Fibonacci)</string>
     <string name="preplan">Vorplanung(Stufe 2)</string>

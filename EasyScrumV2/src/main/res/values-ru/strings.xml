@@ -5,7 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="add_new">Добавить</string>
     <string name="edit">Редактировать</string>
-    <string name="delete">Delete deck</string>
+    <string name="delete">Удалить?</string>
     <string name="use_delimiter">Используйте \",\" как разделитель</string>
     <string name="plan">Планирование (Фибоначчи)</string>
     <string name="preplan">Предпланирование (степень 2)</string>

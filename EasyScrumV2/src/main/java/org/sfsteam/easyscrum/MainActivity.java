@@ -42,7 +42,7 @@ import java.util.Map;
 
 
 public class MainActivity extends FragmentActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, DeckDialog.DeckDialogListener, DeckArrayAdapter.CardActivityCallback {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, DeckDialog.DeckDialogListener, DeckArrayAdapter.CardActivityCallback,DeleteDialog.DeleteDialogListener {
 
     private static final String POWER_OF_2 = "1,2,4,8,16,@cup";
     private static final String FIBONACCI = "1,2,3,5,8,13,@cup";
@@ -261,6 +261,11 @@ public class MainActivity extends FragmentActivity
 
     }
 
+    @Override
+    public void onDeleteDialogPositiveClick(DialogFragment dialog) {
+        mNavigationDrawerFragment.onDeleteDialogPositiveClick();
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -444,7 +449,9 @@ public class MainActivity extends FragmentActivity
     @Override
     protected void onStop(){
         super.onStop();
-
+        if (deckInGrid == null){
+            return;
+        }
         // We need an Editor object to make preference changes.
         // All objects are from android.context.Context
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);

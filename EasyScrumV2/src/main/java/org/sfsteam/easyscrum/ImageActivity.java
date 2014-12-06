@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -30,11 +31,12 @@ import static org.sfsteam.easyscrum.MainActivity.saveFile;
 
 
 public class ImageActivity extends FragmentActivity implements ImageDialog.ImageDialogListener,
-        ImagesMapAdapter.ImageActivityCallback {
+        ImagesMapAdapter.ImageActivityCallback, DeleteDialog.DeleteDialogListener {
 
     private HashMap<String, ImageDT> imagesMap;
     private String editAlias;
     private ImagesMapAdapter adapter;
+    private String aliasName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class ImageActivity extends FragmentActivity implements ImageDialog.Image
         List<String> imagesListMap = getListImages();
         adapter = new ImagesMapAdapter(this, R.layout.list_item, getImagesMap(), imagesListMap);
         imagesList.setAdapter(adapter);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -101,10 +104,9 @@ public class ImageActivity extends FragmentActivity implements ImageDialog.Image
 
     @Override
     public void deleteFromMap(String aliasName) {
-        getImagesMap().remove(aliasName);
-        renewAdapter();
-        Toast.makeText(getApplicationContext(), String.format(getString(R.string.delete_from_map), aliasName), Toast.LENGTH_SHORT).show();
-
+        this.aliasName = aliasName;
+        DeleteDialog ddialog = new DeleteDialog();
+        ddialog.show(getSupportFragmentManager(), "deleteDialog");
     }
 
     private void renewAdapter() {
@@ -156,4 +158,10 @@ public class ImageActivity extends FragmentActivity implements ImageDialog.Image
     }
 
 
+    @Override
+    public void onDeleteDialogPositiveClick(DialogFragment dialog) {
+        getImagesMap().remove(aliasName);
+        renewAdapter();
+        Toast.makeText(getApplicationContext(), String.format(getString(R.string.delete_from_map), aliasName), Toast.LENGTH_SHORT).show();
+    }
 }

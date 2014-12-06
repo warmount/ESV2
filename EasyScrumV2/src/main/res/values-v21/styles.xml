@@ -2,8 +2,9 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Material.Light">
-        <item name="android:colorPrimary">@color/material_deep_teal_500</item>
-        <item name="android:colorPrimaryDark">@color/material_blue_grey_800</item>
+        <item name="android:colorPrimary">#0277BD</item>
+        <item name="android:colorPrimaryDark">#0D47A1</item>
+        <item name="android:activatedBackgroundIndicator">@color/listview</item>
     </style>
 
 </resources>
