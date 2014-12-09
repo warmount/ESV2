@@ -1,17 +1,17 @@
 package org.sfsteam.easyscrum;
 
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,10 +21,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.sfsteam.easyscrum.data.DeckDT;
 import org.sfsteam.easyscrum.data.DialogMode;
+import org.sfsteam.easyscrum.data.ListViewArrayAdapter;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -67,7 +69,6 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mUserLearnedDrawer;
     private DeckDT deckInGrid;
 
-
     public NavigationDrawerFragment() {
     }
 
@@ -86,7 +87,6 @@ public class NavigationDrawerFragment extends Fragment {
             selectItem(mCurrentSelectedPosition);
             return;
         }
-
         // Select either the default item (0) or the last selected item.
     }
 
@@ -134,13 +134,12 @@ public class NavigationDrawerFragment extends Fragment {
             i++;
         }
 
-        mDrawerListView.setAdapter(new ArrayAdapter<>(
-                getActionBar().getThemedContext(),
+        mDrawerListView.setAdapter(new ListViewArrayAdapter<>(
+                getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
                 array));
         getActivity().invalidateOptionsMenu();
-
 
     }
 
@@ -163,16 +162,11 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
 
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */
-                R.drawable.ic_drawer,             /* nav drawer image to replace 'Up' caret */
                 R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
         ) {
@@ -184,6 +178,9 @@ public class NavigationDrawerFragment extends Fragment {
                 }
 
                 getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                if (deckInGrid !=null) {
+                    mCallbacks.setTitleInToolbar(deckInGrid.getName());
+                }
             }
 
             @Override
@@ -203,6 +200,7 @@ public class NavigationDrawerFragment extends Fragment {
                 }
 
                 getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                mCallbacks.setTitleInToolbar(getString(R.string.app_name));
             }
         };
 
@@ -272,7 +270,6 @@ public class NavigationDrawerFragment extends Fragment {
         // showGlobalContextActionBar, which controls the top-left area of the action bar.
         if (mDrawerLayout != null && isDrawerOpen()) {
             inflater.inflate(R.menu.global, menu);
-            showGlobalContextActionBar();
         }
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -300,21 +297,6 @@ public class NavigationDrawerFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Per the navigation drawer design guidelines, updates the action bar to show the global app
-     * 'context', rather than just what's in the current screen.
-     */
-    private void showGlobalContextActionBar() {
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setTitle(R.string.app_name);
-    }
-
-    private ActionBar getActionBar() {
-        return getActivity().getActionBar();
-    }
-
     public int getPositionAfterDelete(List<DeckDT> list) {
         if (list.isEmpty()) {
             return -1;
@@ -333,8 +315,10 @@ public class NavigationDrawerFragment extends Fragment {
         mCurrentSelectedPosition = getPositionAfterDelete(listStr);
         if (mCurrentSelectedPosition != -1) {
             mCallbacks.onNavigationDrawerItemSelected(mCurrentSelectedPosition);
+            mCallbacks.setTitleInToolbar(listStr.get(mCurrentSelectedPosition).getName());
         } else {
             mCallbacks.setTextInGrid();
+            mCallbacks.setTitleInToolbar(getString(R.string.app_name));
         }
         Toast.makeText(getActivity(), R.string.deck_delete, Toast.LENGTH_SHORT).show();
     }
@@ -347,8 +331,8 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
-
         void setTextInGrid();
+        void setTitleInToolbar(String string);
     }
 
     public void setDeckInGrid(DeckDT deckInGrid) {

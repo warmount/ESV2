@@ -1,6 +1,5 @@
 package org.sfsteam.easyscrum;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -12,8 +11,10 @@ import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,8 +42,8 @@ import java.util.List;
 import java.util.Map;
 
 
-public class MainActivity extends FragmentActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, DeckDialog.DeckDialogListener, DeckArrayAdapter.CardActivityCallback,DeleteDialog.DeleteDialogListener {
+public class MainActivity extends ActionBarActivity
+implements NavigationDrawerFragment.NavigationDrawerCallbacks, DeckDialog.DeckDialogListener, DeckArrayAdapter.CardActivityCallback,DeleteDialog.DeleteDialogListener {
 
     private static final String POWER_OF_2 = "1,2,4,8,16,@cup";
     private static final String FIBONACCI = "1,2,3,5,8,13,@cup";
@@ -54,11 +55,8 @@ public class MainActivity extends FragmentActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
-    private CharSequence mTitle;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     public static final String IMAGES_MAP = "images.map";
 
@@ -66,6 +64,7 @@ public class MainActivity extends FragmentActivity
     private DeckDT deckInGrid;
     private HashMap<String, ImageDT> imagesMap;
     private boolean initial = true;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,16 +75,26 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         if (prefDeckId != -1 && !deckList.isEmpty()){
-            onNavigationDrawerItemSelected(getIndexById(getDeckList(),prefDeckId));
+            int index = getIndexById(getDeckList(), prefDeckId);
+            onNavigationDrawerItemSelected(index);
+            setTitleInToolbar(getDeckList().get(index).getName());
         }
     }
 
@@ -160,13 +169,11 @@ public class MainActivity extends FragmentActivity
         } catch (IOException e) {
             Log.e("IO", e.getLocalizedMessage());
         }
-
         return cup;
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-
         if (position != -1) {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
@@ -183,8 +190,17 @@ public class MainActivity extends FragmentActivity
                 .replace(R.id.container, PlaceholderFragment.newInstance())
                 .commit();
         initial = true;
-        mTitle = getTitle();
         invalidateOptionsMenu();
+    }
+
+    @Override
+    public void setTitleInToolbar(String string) {
+//        if (toolbar == null){
+//            toolbar = (Toolbar) findViewById(R.id.toolbar);
+//            setSupportActionBar(toolbar);
+//        }
+        getSupportActionBar().setTitle(string);
+
     }
 
     public void onSectionAttached(int deckId) {
@@ -194,26 +210,16 @@ public class MainActivity extends FragmentActivity
         }
         deckInGrid = deckMap.get(deckId);
         initial = false;
-        mTitle = deckInGrid.getName();
         if (mNavigationDrawerFragment != null) {
             mNavigationDrawerFragment.setDeckInGrid(deckInGrid);
             invalidateOptionsMenu();
         }
     }
 
-    public void restoreActionBar() {
-        ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (mNavigationDrawerFragment != null && !mNavigationDrawerFragment.isDrawerOpen()) {
             getMenuInflater().inflate(initial ? R.menu.global : R.menu.main, menu);
-            restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
@@ -225,7 +231,7 @@ public class MainActivity extends FragmentActivity
         if (id == R.id.add_deck) {
 
             DeckDialog newFragment = new DeckDialog();
-            //is it necessary?
+            //is it necessary? set this for
             newFragment.setMode(DialogMode.ADD);
             newFragment.show(getSupportFragmentManager(), "deckDialog");
 
@@ -258,7 +264,7 @@ public class MainActivity extends FragmentActivity
 
         mNavigationDrawerFragment.setNewList();
         onNavigationDrawerItemSelected(deckList.indexOf(deck));
-
+        setTitleInToolbar(deck.getName());
     }
 
     @Override
@@ -358,6 +364,7 @@ public class MainActivity extends FragmentActivity
         super.onSaveInstanceState(outState);
         if (deckInGrid != null) {
             outState.putString("deck", deckInGrid.getDeckString());
+            outState.putString("deck_name", deckInGrid.getName());
         }
     }
 
@@ -367,6 +374,7 @@ public class MainActivity extends FragmentActivity
         String deck = savedInstanceState.getString("deck");
         if (deck != null) {
             onNavigationDrawerItemSelected(deckList.indexOf(deck));
+            setTitleInToolbar(savedInstanceState.getString("deck_name"));
         }
     }
 

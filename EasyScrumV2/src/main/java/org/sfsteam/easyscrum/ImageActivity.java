@@ -7,7 +7,8 @@ import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +31,7 @@ import static org.sfsteam.easyscrum.MainActivity.IMAGES_MAP;
 import static org.sfsteam.easyscrum.MainActivity.saveFile;
 
 
-public class ImageActivity extends FragmentActivity implements ImageDialog.ImageDialogListener,
+public class ImageActivity extends ActionBarActivity implements ImageDialog.ImageDialogListener,
         ImagesMapAdapter.ImageActivityCallback, DeleteDialog.DeleteDialogListener {
 
     private HashMap<String, ImageDT> imagesMap;
@@ -47,7 +48,10 @@ public class ImageActivity extends FragmentActivity implements ImageDialog.Image
         List<String> imagesListMap = getListImages();
         adapter = new ImagesMapAdapter(this, R.layout.list_item, getImagesMap(), imagesListMap);
         imagesList.setAdapter(adapter);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
 
@@ -118,7 +122,6 @@ public class ImageActivity extends FragmentActivity implements ImageDialog.Image
         Intent resultIntent = new Intent();
         resultIntent.putExtra("imageMap", getImagesMap());
         setResult(Activity.RESULT_OK, resultIntent);
-
     }
 
     @Override

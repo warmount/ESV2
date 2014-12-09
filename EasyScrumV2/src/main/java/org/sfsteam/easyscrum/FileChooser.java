@@ -49,7 +49,7 @@ public class FileChooser extends ListActivity {
                     String extention = ff.getName().substring(dotposition + 1, ff.getName().length());
 
                     if (extention.equalsIgnoreCase("png") || extention.equalsIgnoreCase("jpg") ||
-                            extention.equalsIgnoreCase("jpeg")) {
+                            extention.equalsIgnoreCase("jpeg") || extention.equalsIgnoreCase("gif")) {
                         fls.add(new Option(ff.getName(), getString(R.string.file_size) + ff.length(), ff.getAbsolutePath()));
                     }
                 }
