@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_new">Agregar</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Eliminar?</string>
+    <string name="use_delimiter">Usa \",\" como separador</string>
+    <string name="plan">Planificación (Fibonacci)</string>
+    <string name="preplan">Planificación previa (potencia de 2)</string>
+    <string name="deck_name">Nombre de baraja</string>
+    <string name="mock_text">Elige una baraja en el menú o crea una baraja nueva\"+\"</string>
+    <string name="have_name">Baraja con el mismo nombre ya existe</string>
+    <string name="have_string"> Baraja con las mismas cartas ya existe</string>
+    <string name="empty_string">No se puede crear una baraja sin cartas</string>
+    <string name="empty_card">Baraja no puede incluir cartas vacías</string>
+    <string name="deck_delete">Baraja se ha eliminado</string>
+    <string name="alias_name">Nombre de imagen</string>
+    <string name="path">Ruta de acceso</string>
+    <string name="delete_from_map">\"%s\"eliminado de asignaciones</string>
+    <string name="folder">Carpeta</string>
+    <string name="file_size">Tamaño de archivo: </string>
+    <string name="current_folder">Carpeta corriente: </string>
+    <string name="parent_folder">A la carpeta principal</string>
+    <string name="title_activity_image">Usa @nombre en la baraja</string>
+    <string name="add_new_demo">Agregar una baraja nueva</string>
+    <string name="map_images">Asignar nombre a imagen. Usa @nombre en la baraja</string>
+    <string name="same_image">No se puede asignar el mismo nombre a la misma imagen</string>
+    <string name="shake_settings">Configuración de sensor</string>
+    <string name="title_settings">Configuración</string>
+    <string name="sensitivity">Sensibilidad</string>
+    <string name="acceleration">Aceleración</string>
+    <string name="test_sensor">Prueba de sensor</string>
+</resources>

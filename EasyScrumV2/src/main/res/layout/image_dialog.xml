@@ -44,12 +44,10 @@
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_search"
                 android:layout_margin="5dp"
-                android:text="@string/image_chooser"
                 android:layout_column="3"
                 android:scaleType="fitCenter"
                 android:baselineAlignBottom="false"
                 android:layout_gravity="center"
-                android:contentDescription="Find Image"
                 android:adjustViewBounds="false"
                 android:cropToPadding="false"
                 />

@@ -25,13 +25,16 @@
             android:parentActivityName="org.sfsteam.easyscrum.MainActivity">
         </activity>
         <activity
+            android:name="org.sfsteam.easyscrum.SettingsActivity"
+            android:label="@string/title_settings"
+            android:parentActivityName="org.sfsteam.easyscrum.MainActivity">
+        </activity>
+        <activity
             android:name="org.sfsteam.easyscrum.FileChooser"
-            android:theme="@style/AppTheme"
-            android:label="@string/file_choose" >
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name="org.sfsteam.easyscrum.TransparentActivity"
-            android:label="@string/title_activity_transparent"
             android:theme="@style/Transparent">
         </activity>
     </application>

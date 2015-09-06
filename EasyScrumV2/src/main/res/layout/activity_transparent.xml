@@ -15,61 +15,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/mapImages"
+        android:text="@string/map_images"
         android:id="@+id/mapToAlias"
-        android:layout_marginTop="27dp"
         android:textColor="#ffffff"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/openMenu"
-        android:layout_alignEnd="@+id/openMenu"
-        android:layout_alignParentEnd="false"
-        android:layout_marginRight="-100dp" />
+        android:layout_below="@+id/imageGal"
+        android:layout_alignLeft="@+id/addNewDeck"
+        android:layout_alignStart="@+id/addNewDeck"
+        android:layout_alignRight="@+id/imageSet"
+        android:layout_alignEnd="@+id/imageSet" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/addNewDemo"
+        android:text="@string/add_new_demo"
         android:id="@+id/addNewDeck"
         android:textColor="#ffffff"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/imageAdd"
+        android:layout_alignLeft="@+id/imageAdd"
+        android:layout_alignStart="@+id/imageAdd" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/imageGal"
+        android:background="@android:drawable/ic_menu_gallery"
+        android:layout_below="@+id/addNewDeck"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/imageAdd"
+        android:background="@android:drawable/ic_menu_add"
+        android:layout_marginTop="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/imageGal"
+        android:layout_toStartOf="@+id/imageGal" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/imageSet"
+        android:layout_marginTop="43dp"
         android:layout_below="@+id/mapToAlias"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_toRightOf="@+id/imageGal"
+        android:layout_toEndOf="@+id/imageGal"
+        android:background="@android:drawable/ic_menu_preferences" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/openDemo"
-        android:id="@+id/openMenu"
-        android:layout_below="@+id/addNewDeck"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="70dp"
+        android:text="@string/title_settings"
+        android:id="@+id/settingsText"
+        android:layout_below="@+id/imageSet"
+        android:layout_alignRight="@+id/imageSet"
+        android:layout_alignEnd="@+id/imageSet"
         android:textColor="#ffffff" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@android:drawable/arrow_up_float"
-        android:layout_marginTop="48dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/mapToAlias"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="200dp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:src="@android:drawable/arrow_up_float"
-        android:layout_above="@+id/mapToAlias"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

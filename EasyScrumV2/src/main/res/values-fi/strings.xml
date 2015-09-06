@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_new">Lisää</string>
+    <string name="edit">Muokkaa</string>
+    <string name="delete">Poistaako?</string>
+    <string name="use_delimiter">Käytä \",\" erottimena</string>
+    <string name="plan">Suunnittelu (Fibonacci)</string>
+    <string name="preplan">Esisuunnittelu (kahden potenssi)</string>
+    <string name="deck_name">Korttipakan nimi</string>
+    <string name="mock_text">Valitse korttipakka menusta tai luo uusi\"+\"</string>
+    <string name="have_name">Samanniminen korttipakka on jo olemassa</string>
+    <string name="have_string"> Samankorttinen pakka on jo olemassa </string>
+    <string name="empty_string">Ei voida luoda korttipakkaa ilman kortteja</string>
+    <string name="empty_card">Korttipakka ei voi sisältää tyhjiä kortteja</string>
+    <string name="deck_delete">Korttipakka poistettu</string>
+    <string name="alias_name">Kuvan nimi</string>
+    <string name="path">Polku</string>
+    <string name="delete_from_map">\"%s\" poistettu yhdistämismäärityksestä</string>
+    <string name="folder">Kansio</string>
+    <string name="file_size">Tiedoston koko: </string>
+    <string name="current_folder">Nykyinen kansio: </string>
+    <string name="parent_folder">Yläkansioon</string>
+    <string name="title_activity_image">Käytä @nimi korttipakassa</string>
+    <string name="add_new_demo">Lisää uusi korttipakka</string>
+    <string name="map_images">Yhdistä kuva nimeen. Käytä @nimi pakassa</string>
+    <string name="same_image">Ei voida yhdistää samaa kuvaa samaan nimeen</string>
+    <string name="shake_settings">Anturin asetukset</string>
+    <string name="title_settings">Asetukset</string>
+    <string name="sensitivity">Herkkyys</string>
+    <string name="acceleration">Kiihtyvyys</string>
+    <string name="test_sensor">Anturin testi</string>
+</resources>

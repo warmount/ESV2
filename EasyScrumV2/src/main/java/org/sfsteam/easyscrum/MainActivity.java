@@ -41,7 +41,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class MainActivity extends ActionBarActivity
 implements NavigationDrawerFragment.NavigationDrawerCallbacks, DeckDialog.DeckDialogListener, DeckArrayAdapter.CardActivityCallback,DeleteDialog.DeleteDialogListener {
 
@@ -195,12 +194,7 @@ implements NavigationDrawerFragment.NavigationDrawerCallbacks, DeckDialog.DeckDi
 
     @Override
     public void setTitleInToolbar(String string) {
-//        if (toolbar == null){
-//            toolbar = (Toolbar) findViewById(R.id.toolbar);
-//            setSupportActionBar(toolbar);
-//        }
         getSupportActionBar().setTitle(string);
-
     }
 
     public void onSectionAttached(int deckId) {
@@ -240,6 +234,11 @@ implements NavigationDrawerFragment.NavigationDrawerCallbacks, DeckDialog.DeckDi
         if (id == R.id.image_activity) {
             Intent intent = new Intent(MainActivity.this, ImageActivity.class);
             intent.putExtra("imageMap", getImagesMap());
+            startActivityForResult(intent, 1);
+            return true;
+        }
+        if (id == R.id.settings) {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivityForResult(intent, 1);
             return true;
         }

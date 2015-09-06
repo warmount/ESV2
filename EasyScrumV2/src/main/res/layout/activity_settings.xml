@@ -1,0 +1,68 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="#0277BD"
+        app:theme="@style/ToolBarStyle">
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/shake_settings"
+        android:id="@+id/textView"
+        android:padding="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/sensitivity"
+        android:id="@+id/textView2"
+        android:paddingLeft="20dp" />
+
+    <SeekBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sensSeekBar"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:max="30"
+        android:progress="15" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/acceleration"
+        android:id="@+id/textView3"
+        android:paddingLeft="20dp" />
+
+    <SeekBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/accelSeekBar"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:max="5"
+        android:longClickable="false"
+        android:progress="2" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test_sensor"
+        android:id="@+id/testButton"
+        android:layout_gravity="center_horizontal" />
+
+
+</LinearLayout>

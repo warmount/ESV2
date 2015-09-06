@@ -1,8 +1,4 @@
 <resources>
-
-    <string name="app_name">EasyScrum</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="add_new">Добавить</string>
     <string name="edit">Редактировать</string>
     <string name="delete">Удалить?</string>
@@ -11,25 +7,25 @@
     <string name="preplan">Предпланирование (степень 2)</string>
     <string name="deck_name">Имя колоды</string>
     <string name="mock_text">Выберите колоду из меню или создайте новую \"+\"</string>
-    <string name="no_image">no image :(</string>
     <string name="have_name">Уже есть колода с таким именем</string>
     <string name="have_string"> Уже есть колода с такими картами </string>
     <string name="empty_string">Нельзя создать колоду без карт</string>
     <string name="empty_card">Нельзя создать колоду с пустыми картами</string>
-    <string name="deck_delete">Колода была удалена</string>
-    <string name="alias_name">Имя карты</string>
-    <string name="image_chooser">Button</string>
+    <string name="deck_delete">Колода удалена</string>
+    <string name="alias_name">Имя картинки</string>
     <string name="path">Путь</string>
-    <string name="file_choose">Pick image file</string>
     <string name="delete_from_map">\"%s\" удален из маппинга</string>
     <string name="folder">Папка</string>
     <string name="file_size">Размер файла: </string>
     <string name="current_folder">Текущая папка: </string>
     <string name="parent_folder">Вверх</string>
     <string name="title_activity_image">Используйте @имя в колоде</string>
-    <string name="addNewDemo">Добавить новую колоду</string>
-    <string name="openDemo">Открыть меню</string>
-    <string name="mapImages">Маппинг картинки на имя. Используйте @имя в колоде</string>
-    <string name="same_image">Вы не можете сохранить маппинг на ту же картинку с тем же именем</string>
-
+    <string name="add_new_demo">Добавить новую колоду</string>
+    <string name="map_images">Маппинг картинки на имя. Используйте @имя в колоде</string>
+    <string name="same_image">Вы не можете сохранить ту же картинку с тем же именем</string>
+    <string name="shake_settings">Настройки сенсора</string>
+    <string name="title_settings">Настройки</string>
+    <string name="sensitivity">Чувствительность</string>
+    <string name="acceleration">Ускорение</string>
+    <string name="test_sensor">Тест сенсора</string>
 </resources>

@@ -2,12 +2,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
-    <item android:id="@+id/image_activity"
-        android:title="@string/mapImages"
-        android:icon="@android:drawable/ic_menu_gallery"
-        app:showAsAction="ifRoom" />
     <item android:id="@+id/add_deck"
         android:title="@string/add_new"
         android:icon="@android:drawable/ic_menu_add"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/image_activity"
+        android:title="@string/map_images"
+        android:icon="@android:drawable/ic_menu_gallery"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/settings"
+        android:title="@string/title_settings"
+        android:icon="@android:drawable/ic_menu_preferences"
         app:showAsAction="ifRoom" />
 </menu>
